@@ -1,11 +1,12 @@
 using System;
 using System.Linq;
+using SalesWebMvc.Data.Interfaces;
 using SalesWebMvc.Models;
 using SalesWebMvc.Models.Enums;
 
 namespace SalesWebMvc.Data
 {
-    public class SeedingService
+    public class SeedingService: ISeedingService 
     {
         private SalesWebMvcContext _context;
 

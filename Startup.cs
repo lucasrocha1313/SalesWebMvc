@@ -6,7 +6,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using SalesWebMvc.Data;
+using SalesWebMvc.Data.Interfaces;
 using SalesWebMvc.Models;
+using SalesWebMvc.Services;
+using SalesWebMvc.Services.Interfaces;
 
 namespace SalesWebMvc
 {
@@ -23,15 +26,17 @@ namespace SalesWebMvc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
 
             services.AddDbContext<SalesWebMvcContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("SalesWebMvcContext")));
 
-            services.AddScoped<SeedingService>();
+            services.AddScoped<ISeedingService, SeedingService>();
+            services.AddScoped<ISellerService, SellerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SeedingService seedingService)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ISeedingService seedingService)
         {
             if (env.IsDevelopment())
             {
@@ -56,7 +61,9 @@ namespace SalesWebMvc
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
+            
         }
     }
 }
