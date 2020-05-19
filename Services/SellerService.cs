@@ -5,14 +5,13 @@ using SalesWebMvc.Services.Interfaces;
 
 namespace SalesWebMvc.Services
 {
-    public class SellerService : ISellerService
+    public class SellerService : BaseService, ISellerService
     {
-        private readonly SalesWebMvcContext _context;
-
-        public SellerService(SalesWebMvcContext context)
+        public SellerService(SalesWebMvcContext context): base(context)
         {
-            _context = context;
+            
         }
+
         public List<Seller> FindAll()
         {
             return _context.Seller.ToList();
@@ -20,7 +19,6 @@ namespace SalesWebMvc.Services
 
         public void Insert(Seller seller)
         {
-            seller.Department = _context.Department.First();
             _context.Add(seller);
             _context.SaveChanges();
         }
