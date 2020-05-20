@@ -7,5 +7,7 @@ namespace SalesWebMvc.Services.Interfaces
     {
         List<Seller> FindAll();
         void Insert(Seller seller);
+        Seller FindById(int id);
+        void Remove(int id);
     }
 }
