@@ -9,5 +9,6 @@ namespace SalesWebMvc.Services.Interfaces
         void Insert(Seller seller);
         Seller FindById(int id);
         void Remove(int id);
+        void Update(Seller seller);
     }
 }
