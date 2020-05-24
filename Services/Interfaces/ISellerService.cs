@@ -1,14 +1,15 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using SalesWebMvc.Models;
 
 namespace SalesWebMvc.Services.Interfaces
 {
     public interface ISellerService
     {
-        List<Seller> FindAll();
-        void Insert(Seller seller);
-        Seller FindById(int id);
-        void Remove(int id);
-        void Update(Seller seller);
+        Task<List<Seller>> FindAllAsync();
+        Task Insert(Seller seller);
+        Task<Seller> FindByIdAsync(int id);
+        Task RemoveAsync(int id);
+        Task UpdateAsync(Seller seller);
     }
 }
